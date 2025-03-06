@@ -24,8 +24,14 @@ jobs:
       - name: Install flake8
         run: pip install flake8
 
-      - name: Run flake8 via reviewdog
-        uses: reviewdog/action-flake8@v1
+      - name: Set up reviewdog
+        uses: reviewdog/action-setup@v1
         with:
-          reporter: github-pr-review
-          level: error
+          version: latest
+
+      - name: Run flake8 with reviewdog
+        run: |
+          flake8 . --format=default | reviewdog -f=flake8 \
+            -name="flake8" \
+            -reporter=github-pr-review \
+            -level=error
