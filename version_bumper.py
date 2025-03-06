@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 
+
 def read_version(file_path="VERSION.txt"):
     try:
         with open(file_path, "r") as f:
@@ -9,9 +10,11 @@ def read_version(file_path="VERSION.txt"):
     except FileNotFoundError:
         return "0.0.0"
 
+
 def write_version(version, file_path="VERSION.txt"):
     with open(file_path, "w") as f:
         f.write(version + "\n")
+
 
 def bump_version(version, bump_type):
     major, minor, patch = map(int, version.split("."))
@@ -25,18 +28,28 @@ def bump_version(version, bump_type):
     elif bump_type == "patch":
         patch += 1
     else:
-        raise ValueError("Invalid bump type. Use 'major', 'minor', or 'patch'.")
+        raise ValueError(
+            "Invalid bump type. Use 'major', 'minor', or 'patch'."
+        )
     return f"{major}.{minor}.{patch}"
 
+
 def main():
-    parser = argparse.ArgumentParser(description="Automatically bump the version number.")
-    parser.add_argument("bump", choices=["major", "minor", "patch"], help="Which part of the version to bump")
+    parser = argparse.ArgumentParser(
+        description="Automatically bump the version number."
+    )
+    parser.add_argument(
+        "bump",
+        choices=["major", "minor", "patch"],
+        help="Which part of the version to bump"
+    )
     args = parser.parse_args()
-    
+
     current_version = read_version()
     new_version = bump_version(current_version, args.bump)
     write_version(new_version)
     print(f"Bumped version: {current_version} -> {new_version}")
+
 
 if __name__ == "__main__":
     main()
