@@ -7,7 +7,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 def load_data():
     """
-    Opens a file dialog for the user to select a CSV file and loads it into a DataFrame.
+    Opens a file dialog for the user to select a CSV file
     The CSV should contain at least "Date" and "Cases" columns.
     """
     file_path = filedialog.askopenfilename(
@@ -60,7 +60,7 @@ def display_plot(root, fig):
 
 def on_load(root):
     """
-    Handler for the 'Load CSV Data' button. Loads data and displays the plot if successful.
+    Handler for the 'Load CSV Data' button. Loads data and displays the plot.
     """
     df = load_data()
     if df is not None:
